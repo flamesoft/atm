@@ -22,16 +22,6 @@ class Atm
       end
     end
 
-    def insufficient_funds_in_account?(amount, account)
-      amount > account.balance
-    end
-
-    def perform_transaction(amount, account)
-      @funds -= amount
-      account.balance = account.balance - amount
-      {status: true, message: 'success', date: Date.today, amount: amount, bills: add_bills(amount)}
-    end
-
     def add_bills(amount)
       denominations = [20, 10, 5]
       bills = []
@@ -49,6 +39,16 @@ class Atm
     end
 
     private
+
+    def insufficient_funds_in_account?(amount, account)
+      amount > account.balance
+    end
+
+    def perform_transaction(amount, account)
+      @funds -= amount
+      account.balance = account.balance - amount
+      {status: true, message: 'success', date: Date.today, amount: amount, bills: add_bills(amount)}
+    end
 
     def incorrect_pin?(pin_code, actual_pin)
       pin_code != actual_pin
