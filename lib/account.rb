@@ -1,10 +1,12 @@
 class Account
-  attr_accessor :balance, :holder, :pin_code, :exp_date, :account_status
-  def initialize(pin_code,account_status,exp_date, balance, holder)
-    @pin_code = pin_code.to_f
-    @exp_date = exp_date
-    @account_status = account_status
-    self.balance = balance
-    self.holder = holder
+  attr_accessor  :pin_code, :exp_date, :account_status, :balance, :holder
+  def initialize
+    @pin_code = get_random_pin_code
+    @exp_date = '04/17'
+
+  end
+
+  def get_random_pin_code
+    rand(1000..9999)
   end
 end
