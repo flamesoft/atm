@@ -5,6 +5,7 @@ class Account
     @pin_code = get_random_pin_code
     @exp_date = set_expire_date
     @balance = 0
+    @account_status = :active
   end
 
   def get_random_pin_code
@@ -13,5 +14,9 @@ class Account
 
   def set_expire_date
     Date.today.next_year(Account::STANDARD_VALIDITY_YRS).strftime("%m/%y")
+  end
+
+  def deactivate
+    @account_status = :deactivated
   end
 end
