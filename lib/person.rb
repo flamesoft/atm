@@ -5,7 +5,6 @@ class Person
   def initialize(attrs = {})
     set_name(attrs[:name])
     @cash = 0
-    create_account
   end
 
   def set_name(obj)
@@ -20,7 +19,13 @@ class Person
     @account = Account.new(owner: self)
   end
 
-  def deposit
-
+  def deposit(amount)
+    if @account == nil
+      raise(RuntimeError, 'No account present')
+    end
+    @cash -= amount
+    @account.balance += amount
   end
+
+
 end
