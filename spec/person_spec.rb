@@ -15,10 +15,6 @@ describe Person do
     expect(subject.cash).to eq 0
   end
 
-  # it 'is expected to have a :account attribute' do
-  #   expect(subject.account).to be nil
-  # end
-
   describe 'can create an Account' do
     before {subject.create_account}
     it 'of Account class' do
@@ -35,6 +31,26 @@ describe Person do
     before {subject.create_account}
     it 'can deposit funds' do
       expect(subject.deposit(100)).to be_truthy
+    end
+    it 'cash is reduced after deposit' do
+      subject.cash = 100
+      subject.deposit(100)
+      expect(subject.cash).to eq 0
+    end
+
+    it 'funds are added to the accounts balance' do
+      subject.cash = 100
+      subject.deposit(100)
+      expect(subject.account.balance).to eq 100
+    end
+
+    it 'can withdraw funds' do
+      command = lambda { subject.withdraw(amount: 100, pin: subject.account.pin_code, account: subject.account, atm: atm) }
+      expect(command.call).to be_truthy
+    end
+
+    it 'increase cash on withdraw'
+      
     end
   end
 
