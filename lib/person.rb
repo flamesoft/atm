@@ -44,7 +44,11 @@ private
   end
 
   def increase_cash(response)
-    @cash += response[:amount]
+    if response[:amount] == nil
+      raise 'Amount in ATM is nil'
+    else
+      @cash += response[:amount]
+    end
   end
 
   def missing_atm
