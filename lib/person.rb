@@ -13,12 +13,7 @@ class Person
   end
 
   def deposit(amount)
-    if @account == nil
-      raise(RuntimeError, 'No account present')
-    else
-      @cash -= amount
-      @account.balance += amount
-    end
+    @account == nil ? missing_account : deposit_funds(amount)
   end
 
   def withdraw(args = {})
@@ -26,6 +21,11 @@ class Person
   end
 
 private
+
+  def deposit_funds(amount)
+    @cash -= amount
+    @account.balance += amount
+  end
 
   def set_name(obj)
       obj == nil ? missing_name : @name = obj
@@ -50,5 +50,9 @@ private
 
   def missing_atm
     raise RuntimeError, 'An ATM is required'
+  end
+
+  def missing_account
+    raise RuntimeError, 'No account present'
   end
 end
