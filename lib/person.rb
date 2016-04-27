@@ -8,14 +8,6 @@ class Person
     @cash = 0
   end
 
-  def set_name(obj)
-      obj == nil ? missing_name : @name = obj
-  end
-
-  def missing_name
-    raise 'A name is required'
-  end
-
   def create_account
     @account = Account.new(owner: self)
   end
@@ -34,6 +26,14 @@ class Person
   end
 
 private
+
+  def set_name(obj)
+      obj == nil ? missing_name : @name = obj
+  end
+
+  def missing_name
+    raise 'A name is required'
+  end
 
   def withdraw_funds(args)
     args[:atm] == nil ? missing_atm : atm = args[:atm]

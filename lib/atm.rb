@@ -22,6 +22,9 @@ class Atm
       end
     end
 
+
+    private
+
     def add_bills(amount)
       denominations = [20, 10, 5]
       bills = []
@@ -37,8 +40,6 @@ class Atm
     def insufficient_funds_in_atm?(amount)
       @funds < amount
     end
-
-    private
 
     def insufficient_funds_in_account?(amount, account)
       amount > account.balance
