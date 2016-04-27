@@ -1,6 +1,7 @@
 require './lib/account.rb'
 class Person
-  attr_accessor :name, :cash, :account
+  attr_accessor :cash
+  attr_reader :name, :account
 
   def initialize(attrs = {})
     set_name(attrs[:name])
@@ -44,11 +45,7 @@ private
   end
 
   def increase_cash(response)
-    if response[:amount] == nil
-      raise 'Amount in ATM is nil'
-    else
-      @cash += response[:amount]
-    end
+    @cash += response[:amount]
   end
 
   def missing_atm
