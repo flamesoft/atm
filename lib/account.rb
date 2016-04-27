@@ -1,3 +1,5 @@
+require './lib/errorHandler.rb'
+
 class Account
   STANDARD_VALIDITY_YRS = 5
   attr_accessor :balance
@@ -25,12 +27,8 @@ private
     Date.today.next_year(Account::STANDARD_VALIDITY_YRS).strftime("%m/%y")
   end
 
- def set_owner(obj)
-   obj == nil ? missing_owner : @owner = obj
- end
-
- def missing_owner
-   raise "An Account owner is required"
- end
+  def set_owner(obj)
+   obj == nil ? ErrorHandler.alert('An Account owner is required') : @owner = obj
+  end
 
 end

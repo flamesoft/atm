@@ -1,4 +1,6 @@
 require './lib/account.rb'
+require './lib/errorHandler.rb'
+
 class Person
   attr_accessor :cash
   attr_reader :name, :account
@@ -13,11 +15,11 @@ class Person
   end
 
   def deposit(amount)
-    @account == nil ? missing_account : deposit_funds(amount)
+    @account == nil ? ErrorHandler.alert('No account present') : deposit_funds(amount)
   end
 
   def withdraw(args = {})
-    @account == nil ? missing_account : withdraw_funds(args)
+    @account == nil ? ErrorHandler.alert('No account present') : withdraw_funds(args)
   end
 
 private
@@ -28,15 +30,11 @@ private
   end
 
   def set_name(obj)
-      obj == nil ? missing_name : @name = obj
-  end
-
-  def missing_name
-    raise 'A name is required'
+      obj == nil ? ErrorHandler.alert('A name is required') : @name = obj
   end
 
   def withdraw_funds(args)
-    args[:atm] == nil ? missing_atm : atm = args[:atm]
+    args[:atm] == nil ? ErrorHandler.alert('An ATM is required') : atm = args[:atm]
     account = @account
     amount = args[:amount]
     pin = args[:pin]
@@ -48,11 +46,4 @@ private
     @cash += response[:amount]
   end
 
-  def missing_atm
-    raise RuntimeError, 'An ATM is required'
-  end
-
-  def missing_account
-    raise RuntimeError, 'No account present'
-  end
 end
