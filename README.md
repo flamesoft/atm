@@ -1,1 +1,1 @@
-Week 1 ruby challange on CraftAcadamy
+Week 1 ruby challange on CraftAcadamy lol
